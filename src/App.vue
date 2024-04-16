@@ -1,9 +1,11 @@
 <script setup>
 
+import Header from './components/HeaderSection.vue'
+
 </script>
 
 <template>
-  <h1>Olá</h1>
+  <Header />
 </template>
 
 <style scoped>
