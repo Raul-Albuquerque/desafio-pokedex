@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 
 import Header from './components/Header.vue'
-import CardList from './components/CardList.vue'
+import SearchBar from './components/SearchBar.vue'
 
 const state = reactive({
   language: 'pt'
@@ -26,18 +26,19 @@ const setLanguage = (language) => {
       </button>
       <button
         class="btn btn-outline-secondary ms-2"
-        @click="setLanguage('pt')"
-      >
-        <img src="/images/pt.svg">
-        PT-BR
-      </button>
-      <button
-        class="btn btn-outline-secondary ms-2"
         @click="setLanguage('es')"
       >
         <img src="/images/es.svg">
         ES
       </button>
+      <button
+        class="btn btn-outline-secondary ms-2"
+        @click="setLanguage('pt')"
+      >
+        <img src="/images/pt.svg">
+        PT-BR
+      </button>
     </div>
   </Header>
+  <SearchBar :current-language="state.language" />
 </template>
