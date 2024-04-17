@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-secondary bg-opacity-25">
+  <header class="bg-white bg-opacity-75">
     <div class="container p-2 d-flex align-items-center justify-content-between">
       <h1>
         <img

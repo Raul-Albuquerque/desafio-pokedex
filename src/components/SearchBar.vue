@@ -5,10 +5,10 @@ const props = defineProps(['currentLanguage'])
 </script>
 
 <template>
-  <section class="pt-2 pb-5 custom-bg">
+  <section class="pt-2">
     <div
       v-if="props.currentLanguage === 'en'"
-      class="container text-center mt-5 pt-4 pb-3 bg-light rounded"
+      class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
     >
       <h2 class="">
         Find Pokémon
@@ -18,7 +18,7 @@ const props = defineProps(['currentLanguage'])
       </h5>
       <form class="row p-4">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-75 text-light"
+          class="col-md-2 rounded bg-secondary bg-opacity-25"
         >
           <option selected>
             Search by
@@ -40,7 +40,7 @@ const props = defineProps(['currentLanguage'])
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-75 text-light"
+            class="form-control border bg-secondary bg-opacity-25"
           >
         </div>
       </form>
@@ -48,7 +48,7 @@ const props = defineProps(['currentLanguage'])
 
     <div
       v-else-if="props.currentLanguage === 'es'"
-      class="container text-center mt-5 pt-4 pb-3 bg-light rounded"
+      class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
     >
       <h2 class="">
         Encontrar el pokemon
@@ -58,7 +58,7 @@ const props = defineProps(['currentLanguage'])
       </h5>
       <form class="row p-4">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-75 text-light"
+          class="col-md-2 rounded bg-secondary bg-opacity-25"
         >
           <option selected>
             Buscar
@@ -80,7 +80,7 @@ const props = defineProps(['currentLanguage'])
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-75 text-light"
+            class="form-control border bg-secondary bg-opacity-25"
           >
         </div>
       </form>
@@ -88,7 +88,7 @@ const props = defineProps(['currentLanguage'])
 
     <div
       v-else
-      class="container text-center mt-5 pt-4 pb-3 border border-primary border-opacity-10 bg-light rounded"
+      class="container text-center mt-5 pt-4 pb-3 border border-primary border-opacity-10 bg-light rounded-top"
     >
       <h2 class="">
         Encontre o pokémon
@@ -98,7 +98,7 @@ const props = defineProps(['currentLanguage'])
       </h5>
       <form class="row p-4">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-75 text-light"
+          class="col-md-2 rounded bg-secondary bg-opacity-25"
         >
           <option selected>
             Pesquisar por
@@ -120,7 +120,7 @@ const props = defineProps(['currentLanguage'])
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-75 text-light"
+            class="form-control border bg-secondary bg-opacity-25"
           >
         </div>
       </form>
