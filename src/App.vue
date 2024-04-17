@@ -52,5 +52,6 @@ const setLanguage = (language) => {
     background-color: #000;
     background-image: url(images/custom-bg.png);
     background-repeat: repeat;
+    height: 90dvh;
   }
 </style>

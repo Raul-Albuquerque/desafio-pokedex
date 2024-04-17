@@ -1,3 +1,9 @@
+<script setup>
+
+import PokemonModal from './PokemonModal.vue'
+
+</script>
+
 <template>
   <article class="d-inline-flex align-items-center justify-content-center py-2 px-4 bg-dark bg-opacity-75 rounded">
     <div class="d-block text-white me-3">
@@ -23,6 +29,7 @@
       >
     </div>
   </article>
+  <!-- <PokemonModal /> -->
 </template>
 
 <style scoped>

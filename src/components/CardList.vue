@@ -8,11 +8,8 @@ import PokemonCard from './PokemonCard.vue'
 <template>
   <section class="">
     <div
-      class="container bg-white bg-opacity-25 p-4 rounded d-flex align-items-center justify-content-center gap-5 flex-wrap"
+      class="container bg-white bg-opacity-25 p-4 d-flex align-items-center justify-content-center gap-5 flex-wrap rounded-bottom"
     >
-      <PokemonCard />
-      <PokemonCard />
-      <PokemonCard />
       <PokemonCard />
     </div>
   </section>
