@@ -127,10 +127,3 @@ const props = defineProps(['currentLanguage'])
     </div>
   </section>
 </template>
-
-<style scoped>
-  .custom-bg {
-    background-image: url(/public/images/custom-bg.png);
-    background-repeat: repeat;
-  }
-</style>

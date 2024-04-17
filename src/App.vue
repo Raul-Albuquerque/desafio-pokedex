@@ -14,7 +14,7 @@ const setLanguage = (language) => {
 
 </script>
 
-<template>
+<template class="custom-bg">
   <Header>
     <div class="d-flex align-items-center justify-content-end">
       <button
@@ -42,3 +42,10 @@ const setLanguage = (language) => {
   </Header>
   <SearchBar :current-language="state.language" />
 </template>
+
+<style scoped>
+  .custom-bg {
+    background-image: url(/public/images/custom-bg.png);
+    background-repeat: repeat;
+  }
+</style>
