@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
+import CardList from './components/CardList.vue'
 
 const state = reactive({
   language: 'pt'
@@ -14,7 +15,7 @@ const setLanguage = (language) => {
 
 </script>
 
-<template class="custom-bg">
+<template>
   <Header>
     <div class="d-flex align-items-center justify-content-end">
       <button
@@ -40,12 +41,16 @@ const setLanguage = (language) => {
       </button>
     </div>
   </Header>
-  <SearchBar :current-language="state.language" />
+  <main class="custom-bg">
+    <SearchBar :current-language="state.language" />
+    <CardList />
+  </main>
 </template>
 
 <style scoped>
   .custom-bg {
-    background-image: url(/public/images/custom-bg.png);
+    background-color: #000;
+    background-image: url(images/custom-bg.png);
     background-repeat: repeat;
   }
 </style>
