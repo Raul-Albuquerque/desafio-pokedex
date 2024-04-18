@@ -5,7 +5,8 @@ import api from '@/services/api'
 export default createStore({
   state: {
     language: 'pt',
-    pokemons: []
+    pokemons: [],
+    endpoints: []
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -13,19 +14,31 @@ export default createStore({
     },
 
     setPokemons (state, payload) {
-      console.log('setPokemon')
       state.pokemons = payload
+    },
+
+    setPokemonsURL (state, payload) {
+      state.endpoints = payload
+    }
+  }, 
+  getters: {
+    pokemonURL: state => {
+      const endpoints = state.pokemons.map(pokemon => `https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)
+      return endpoints
     }
   },
   actions: {
     async getPokemons ({ commit }) {
       try {
-        await api
-          .get('?limit=20')
-          .then((res) => {
-            console.log(res)
-            commit('setPokemons', res.data)
-          })
+        const response = await api.get('?limit=21')
+        const data = response.data
+
+        data.results.forEach((item, index) => {
+          item.id = index + 1
+        })
+
+        commit('setPokemons', data.results)
+        commit('setPokemonsURL', data.results)
       } catch (error) {
         console.log(error)
       }

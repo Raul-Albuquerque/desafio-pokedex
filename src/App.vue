@@ -14,6 +14,8 @@ onMounted( () => {
   store.dispatch('getPokemons')
     .then(() => {
       console.log('ok')
+      console.log(store.state.pokemons)
+      console.log(store.state.endpoints)
     })
 })
 
