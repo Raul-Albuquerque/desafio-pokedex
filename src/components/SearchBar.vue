@@ -1,13 +1,11 @@
 <script setup>
 
-const props = defineProps(['currentLanguage'])
-
 </script>
 
 <template>
   <section class="pt-2">
     <div
-      v-if="props.currentLanguage === 'en'"
+      v-if="$store.state.language === 'en'"
       class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
     >
       <h2 class="">
@@ -47,7 +45,7 @@ const props = defineProps(['currentLanguage'])
     </div>
 
     <div
-      v-else-if="props.currentLanguage === 'es'"
+      v-else-if="$store.state.language === 'es'"
       class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
     >
       <h2 class="">
