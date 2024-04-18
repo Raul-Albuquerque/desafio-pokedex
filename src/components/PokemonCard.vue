@@ -1,5 +1,4 @@
 <script setup>
-
 import PokemonModal from './PokemonModal.vue'
 
 </script>
