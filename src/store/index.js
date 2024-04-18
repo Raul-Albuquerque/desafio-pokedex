@@ -29,8 +29,11 @@ export default createStore({
   },
   actions: {
     async getPokemons ({ commit }) {
+
+      const limit = 21
+
       try {
-        const response = await api.get('?limit=21')
+        const response = await api.get(`?limit=${limit}`)
         const data = response.data
 
         data.results.forEach((item, index) => {
