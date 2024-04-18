@@ -1,48 +1,29 @@
 <script setup>
-import { reactive } from 'vue'
+import { onMounted } from 'vue'
+
+import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
 import CardList from './components/CardList.vue'
 
-const state = reactive({
-  language: 'pt'
+
+const store = useStore()
+
+onMounted( () => {
+  store.dispatch('getPokemons')
+    .then(() => {
+      console.log(store.state.pokemons)
+    })
 })
 
-const setLanguage = (language) => {
-  return state.language = language
-}
 
 </script>
 
 <template>
-  <Header>
-    <div class="d-flex align-items-center justify-content-end">
-      <button
-        class="btn btn-outline-secondary ms-2"
-        @click="setLanguage('en')"
-      >
-        <img src="/images/en.svg">
-        EN
-      </button>
-      <button
-        class="btn btn-outline-secondary ms-2"
-        @click="setLanguage('es')"
-      >
-        <img src="/images/es.svg">
-        ES
-      </button>
-      <button
-        class="btn btn-outline-secondary ms-2"
-        @click="setLanguage('pt')"
-      >
-        <img src="/images/pt.svg">
-        PT-BR
-      </button>
-    </div>
-  </Header>
+  <Header />
   <main class="custom-bg">
-    <SearchBar :current-language="state.language" />
+    <SearchBar />
     <CardList />
   </main>
 </template>
@@ -54,4 +35,5 @@ const setLanguage = (language) => {
     background-repeat: repeat;
     height: 90dvh;
   }
-</style>
+</style>onMounted, import store from './store';
+useStore, 
