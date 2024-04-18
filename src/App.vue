@@ -13,7 +13,7 @@ const store = useStore()
 onMounted( () => {
   store.dispatch('getPokemons')
     .then(() => {
-      console.log(store.state.pokemons)
+      console.log('ok')
     })
 })
 
@@ -22,18 +22,8 @@ onMounted( () => {
 
 <template>
   <Header />
-  <main class="custom-bg">
+  <main class="">
     <SearchBar />
     <CardList />
   </main>
 </template>
-
-<style scoped>
-  .custom-bg {
-    background-color: #000;
-    background-image: url(images/custom-bg.png);
-    background-repeat: repeat;
-    height: 90dvh;
-  }
-</style>onMounted, import store from './store';
-useStore, 

@@ -6,17 +6,17 @@
   <section class="pt-2">
     <div
       v-if="$store.state.language === 'en'"
-      class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
+      class="container text-center mt-5 p-4 bg-light rounded-top"
     >
       <h2 class="">
         Find Pokémon
       </h2>
-      <h5 class="">
-        Search your favorite pokemon by name, id, type or specie.
-      </h5>
-      <form class="row p-4">
+      <p class="">
+        Search your favorite pokémon by name, id, type or specie.
+      </p>
+      <form class="row p-2">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25"
+          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
         >
           <option selected>
             Search by
@@ -38,25 +38,25 @@
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-25"
+            class="form-control bg-secondary bg-opacity-25"
           >
         </div>
       </form>
     </div>
 
     <div
-      v-else-if="$store.state.language === 'es'"
-      class="container text-center mt-5 pt-4 pb-3 bg-light rounded-top"
+      v-if="$store.state.language === 'es'"
+      class="container text-center mt-5 p-4 bg-light rounded-top"
     >
       <h2 class="">
         Encontrar el pokemon
       </h2>
-      <h5 class="">
+      <p class="">
         Busca tu pokemon favorito por nombre, id, tipo o especie.
-      </h5>
-      <form class="row p-4">
+      </p>
+      <form class="row p-2">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25"
+          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
         >
           <option selected>
             Buscar
@@ -78,25 +78,25 @@
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-25"
+            class="form-control bg-secondary bg-opacity-25"
           >
         </div>
       </form>
     </div>
 
     <div
-      v-else
-      class="container text-center mt-5 pt-4 pb-3 border border-primary border-opacity-10 bg-light rounded-top"
+      v-if="$store.state.language === 'pt'"
+      class="container text-center mt-5 p-4 bg-light rounded-top"
     >
       <h2 class="">
         Encontre o pokémon
       </h2>
-      <h5 class="">
+      <p class="">
         Pesquise o seu pokémon favorito pelo nome, id, tipo ou espécie.
-      </h5>
-      <form class="row p-4">
+      </p>
+      <form class="row p-2">
         <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25"
+          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
         >
           <option selected>
             Pesquisar por
@@ -118,7 +118,7 @@
           <input
             id="name"
             type="text"
-            class="form-control border bg-secondary bg-opacity-25"
+            class="form-control bg-secondary bg-opacity-25"
           >
         </div>
       </form>
