@@ -6,7 +6,8 @@ export default createStore({
   state: {
     language: 'pt',
     pokemons: [],
-    endpoints: []
+    pokemonsList: [],
+    loading: false
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -16,34 +17,47 @@ export default createStore({
     setPokemons (state, payload) {
       state.pokemons = payload
     },
-
-    setPokemonsURL (state, payload) {
-      state.endpoints = payload
+    setNewPokemons (state, payload) {
+      state.pokemonsList.push(...payload)
+    },
+    setLoading (state, status) {
+      state.loading = status
     }
   }, 
   getters: {
-    pokemonURL: state => {
-      const endpoints = state.pokemons.map(pokemon => `https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)
-      return endpoints
-    }
   },
   actions: {
     async getPokemons ({ commit }) {
 
-      const limit = 21
-
       try {
-        const response = await api.get(`?limit=${limit}`)
-        const data = response.data
-
-        data.results.forEach((item, index) => {
+        commit('setLoading', true)
+        const response = await api.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=21')
+        const pokemons = response.data.results
+        pokemons.forEach((item, index) => {
           item.id = index + 1
         })
-
-        commit('setPokemons', data.results)
-        commit('setPokemonsURL', data.results)
+        commit('setPokemons', pokemons)
       } catch (error) {
-        console.log(error)
+        console.error('Erro de conexão com a API', error)
+      } finally {
+        commit('setLoading', false)
+      }
+    },
+
+    async getPokemonsScroll ({ commit, state }) {
+      try {
+        commit('setLoading', true)
+        const response = await api.get(`https://pokeapi.co/api/v2/pokemon?offset=${state.pokemonsList.length}&limit=21`)
+        await new Promise((res) => setTimeout(res, 300))
+        const newPokemons = response.data.results
+        newPokemons.forEach((pokemon, index) => {
+          pokemon.id = index + state.pokemonsList.length + 1
+        })
+        commit('setNewPokemons', newPokemons)
+      } catch (error) {
+        console.error('Erro na hora de compilar novos pokemons', error)
+      } finally {
+        commit('setLoading', false)
       }
     }
   }

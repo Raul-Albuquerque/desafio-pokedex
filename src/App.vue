@@ -5,15 +5,14 @@ import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
-import CardList from './components/CardList.vue'
-
+import PokemonCard from './components/PokemonCard.vue'
 
 const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
     .then(() => {
-      console.log('ok')
+      console.log(store.state.data)
     })
 })
 
@@ -21,14 +20,11 @@ onMounted( () => {
 
 <template>
   <Header />
-  <main class="">
-    <SearchBar />
-    <!-- <CardList /> -->
-    <Suspense>
-      <CardList />
-      <template #fallback>
-        <p>Loading...</p>
-      </template>
-    </Suspense>
-  </main>
+  <SearchBar />
+  <Suspense>
+    <PokemonCard />
+    <template #fallback>
+      <p>Loading...</p>
+    </template>
+  </Suspense>
 </template>

@@ -33,3 +33,20 @@
     </div>
   </header>
 </template>
+
+<!-- <script setup>
+import { useStore } from 'vuex'
+import { ref, onMounted } from 'vue'
+
+const store = useStore()
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    await store.dispatch('getPokemons')
+    loading.value = false
+  } catch (error) {
+    console.error('Erro ao buscar pokemons:', error)
+  }
+})
+</script> -->
