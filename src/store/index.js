@@ -7,7 +7,8 @@ export default createStore({
     language: 'pt',
     pokemons: [],
     pokemonsList: [],
-    loading: false
+    loading: false,
+    pokemonInfo: ''
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -22,6 +23,9 @@ export default createStore({
     },
     setLoading (state, status) {
       state.loading = status
+    },
+    setPokemonInfo (state, payload) {
+      state.pokemonInfo = payload
     }
   }, 
   getters: {
@@ -31,7 +35,7 @@ export default createStore({
 
       try {
         commit('setLoading', true)
-        const response = await api.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=21')
+        const response = await api.get('?offset=0&limit=21')
         const pokemons = response.data.results
         pokemons.forEach((item, index) => {
           item.id = index + 1
@@ -47,7 +51,7 @@ export default createStore({
     async getPokemonsScroll ({ commit, state }) {
       try {
         commit('setLoading', true)
-        const response = await api.get(`https://pokeapi.co/api/v2/pokemon?offset=${state.pokemonsList.length}&limit=21`)
+        const response = await api.get(`?offset=${state.pokemonsList.length}&limit=21`)
         await new Promise((res) => setTimeout(res, 300))
         const newPokemons = response.data.results
         newPokemons.forEach((pokemon, index) => {
@@ -59,6 +63,14 @@ export default createStore({
       } finally {
         commit('setLoading', false)
       }
+    },
+
+    async getPokemonInfo ({ commit }, id) {
+      const response = await api.get(`/${id}`)
+      const data = response.data
+      commit('setPokemonInfo', data)
+      console.log(data)
     }
+
   }
 })

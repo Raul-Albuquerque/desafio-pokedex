@@ -22,6 +22,11 @@ useInfiniteScroll(
   },
   {distance: 5}
 )
+
+const getPokemonId = (id) => {
+  console.log(id)
+}
+
 </script>
 
 <template>
@@ -34,6 +39,7 @@ useInfiniteScroll(
         v-for="pokemon in $store.state.pokemonsList"
         :key="pokemon.id"
         class="col-md-3 d-inline-flex align-items-center justify-content-start bg-secondary bg-opacity-25 rounded py-4 px-3 position-relative pointer"
+        @click="getPokemonId(pokemon.id)"
       >
         <div class="d-block text-white me-2">
           <h5>#{{ pokemon.id }}</h5>
@@ -42,7 +48,7 @@ useInfiniteScroll(
           </h4>
           <div>
             <span class="badge text-bg-success p-2 text-wrap me-2">
-              <img src="/images/leaf.svg">
+              <img src="/images/leaf.svg"> Grass
             </span>
           </div>
         </div>
@@ -61,15 +67,11 @@ useInfiniteScroll(
   .infiniteScroll {
     margin: 0 auto;
     list-style: none;
-    height: 90dvh;
+    height: 70dvh;
     padding: 12px 20px;
     overflow-y: scroll;
-    scrollbar-width: none; /* Para Firefox */
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-    display: none; /* Para Chrome, Safari e Edge */
-    }
+    scrollbar-width: thin;
+    scrollbar-color: #d5d8da rgba(34,34,34,1);
   }
 
   .custom-image {
@@ -82,6 +84,8 @@ useInfiniteScroll(
 
   &:hover{
     opacity: 100%;
+    top: -30px;
+  right: 0px;
   }
 }
 
