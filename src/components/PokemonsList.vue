@@ -3,6 +3,8 @@ import { useStore } from 'vuex'
 import { ref, onMounted } from 'vue'
 import { useInfiniteScroll } from '@vueuse/core'
 
+import PokemonModal from './PokemonModal.vue'
+
 const store = useStore()
 
 const listEl = ref(null)
@@ -24,7 +26,7 @@ useInfiniteScroll(
 )
 
 const getPokemonId = (id) => {
-  console.log(id)
+  store.dispatch('getPokemonsInfo', id)
 }
 
 </script>
@@ -39,6 +41,8 @@ const getPokemonId = (id) => {
         v-for="pokemon in $store.state.pokemonsList"
         :key="pokemon.id"
         class="col-md-3 d-inline-flex align-items-center justify-content-start bg-secondary bg-opacity-25 rounded py-4 px-3 position-relative pointer"
+        data-bs-toggle="modal"
+        data-bs-target="#pokemonModal"
         @click="getPokemonId(pokemon.id)"
       >
         <div class="d-block text-white me-2">
@@ -61,6 +65,7 @@ const getPokemonId = (id) => {
       </li>
     </ul>
   </div>
+  <PokemonModal />
 </template>
 
 <style scoped>
@@ -92,4 +97,5 @@ const getPokemonId = (id) => {
 .pointer {
   cursor: pointer;
 }
-</style>import { useStore } from 'vuex';, { useStore }
+</style>import { useStore } from 'vuex';, { useStore }import PokemonModalVue from './PokemonModal.vue';
+

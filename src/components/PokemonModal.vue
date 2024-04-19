@@ -1,13 +1,9 @@
-<template>
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#pokemonModal"
-  >
-    Launch demo modal
-  </button>
+<script setup>
 
+
+</script>
+
+<template>
   <!-- Modal -->
   <div
     id="pokemonModal"
@@ -21,9 +17,9 @@
         <div class="modal-header">
           <h1
             id="exampleModalLabel"
-            class="modal-title fs-5"
+            class="modal-title fs-5 text-capitalize"
           >
-            BULBASAUR
+            {{ $store.state.pokemonInfo.name }}
           </h1>
           <button
             type="button"
@@ -34,9 +30,10 @@
         </div>
         <div class="modal-body">
           <img
-            class="rounded mx-auto d-block"
-            src="/images/bulba.png"
+            class="rounded mx-auto d-block custom-image"
+            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${$store.state.pokemonInfo.id}.png`"
           >
+          <p />
           <hr>
           <div>
             <p class="d-inline-flex gap-1">
@@ -47,7 +44,7 @@
                 role="button"
                 aria-expanded="false"
                 aria-controls="multiCollapseExample1"
-              >Info 1</a>
+              >Ataques</a>
               <button
                 class="btn btn-primary"
                 type="button"
@@ -56,7 +53,7 @@
                 aria-expanded="false"
                 aria-controls="multiCollapseExample2"
               >
-                Info 2
+                Evoluções
               </button>
             </p>
             <div class="row">
@@ -102,3 +99,11 @@
     </div>
   </div>
 </template>
+<style scoped>
+
+.custom-image {
+  width: 160px;
+  height: 160px;
+}
+
+</style>

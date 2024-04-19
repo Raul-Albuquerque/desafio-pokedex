@@ -65,11 +65,12 @@ export default createStore({
       }
     },
 
-    async getPokemonInfo ({ commit }, id) {
+    async getPokemonsInfo ({ commit }, id) {
+      console.log(id)
       const response = await api.get(`/${id}`)
       const data = response.data
-      commit('setPokemonInfo', data)
       console.log(data)
+      commit('setPokemonInfo', data)
     }
 
   }
