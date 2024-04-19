@@ -1,5 +1,17 @@
 <script setup>
 
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const getpokemonsfiltered = (value) => {
+  if (value) {
+    store.getters.getPokemonByName(value)
+  } else {
+    store.dispatch('getPokemons')
+  }
+}
+
 </script>
 
 <template>
@@ -15,7 +27,7 @@
         Search your favorite pokémon by name, id, type or specie.
       </p>
       <form class="row p-2">
-        <select
+        <!-- <select
           class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
         >
           <option selected>
@@ -33,12 +45,13 @@
           <option value="4">
             Specie
           </option>
-        </select>
-        <div class="col-md-4">
+        </select> -->
+        <div class="col-md-6">
           <input
             id="name"
             type="text"
             class="form-control bg-secondary bg-opacity-25"
+            @input="event => getpokemonsfiltered(event.target.value)"
           >
         </div>
       </form>

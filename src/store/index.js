@@ -16,11 +16,21 @@ export default createStore({
     setPokemons (state, payload) {
       state.pokemons = payload
     },
+    setFilteredPokemons (state, payload) {
+      state.filteredPokemons = payload
+    }
   }, 
   getters: {
     allPokemons(state) {
       return state.pokemons
+    },
+    getPokemonByName: (state) => (name) => {
+      if(name) {
+        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.name.includes(name))
+      }
+      return state.pokemons
     }
+
   }, 
   actions: {
     async getPokemons ({ commit }) {
