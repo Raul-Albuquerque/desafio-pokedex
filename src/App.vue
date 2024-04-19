@@ -11,15 +11,13 @@ const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
-    .then(() => {
-      
-    })
 })
 
 </script>
 
 <template>
   <Header />
+  <!-- <PokemonListTest /> -->
   <SearchBar />
   <Suspense>
     <PokemonsList />
