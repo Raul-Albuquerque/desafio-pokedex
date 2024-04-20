@@ -40,7 +40,7 @@ const store = useStore()
       </div>
     </li>
   </ul>
-  <PokemonModal />
+  <!-- <PokemonModal /> -->
 </template>
 
 <style scoped>

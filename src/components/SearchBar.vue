@@ -1,12 +1,23 @@
 <script setup>
 
+
 import { useStore } from 'vuex'
 
 const store = useStore()
 
-const getpokemonsfiltered = (value) => {
-  if (value) {
-    store.getters.getPokemonByName(value)
+const getPokemonsByName = (name) => {
+  if (name) {
+    console.log(name)
+    store.getters.getPokemonByName(name)
+  } else {
+    store.dispatch('getPokemons')
+  }
+}
+
+const getPokemonsById = (id) => {
+  if (id) {
+    console.log(id)
+    store.getters.getPokemonById(id)
   } else {
     store.dispatch('getPokemons')
   }
@@ -26,38 +37,81 @@ const getpokemonsfiltered = (value) => {
       <p class="">
         Search your favorite pokémon by name, id, type or specie.
       </p>
-      <form class="row p-2">
-        <!-- <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
+      <div>
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          @click="$store.commit('changeInput', 'name')"
         >
-          <option selected>
-            Search by
-          </option>
-          <option value="1">
-            Name
-          </option>
-          <option value="2">
-            Id
-          </option>
-          <option value="3">
-            Type
-          </option>
-          <option value="4">
-            Specie
-          </option>
-        </select> -->
-        <div class="col-md-6">
-          <input
-            id="name"
-            type="text"
-            class="form-control bg-secondary bg-opacity-25"
-            @input="event => getpokemonsfiltered(event.target.value)"
-          >
-        </div>
-      </form>
+          Name
+        </button>
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          @click="$store.commit('changeInput', 'id')"
+        >
+          Id
+        </button>
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          @click="$store.commit('changeInput', 'type')"
+        >
+          Type
+        </button>
+        <button
+          class="btn btn-primary me-2"
+          type="button"
+          @click="$store.commit('changeInput', 'specie')"
+        >
+          Specie
+        </button>
+      </div>
+      <div
+        v-if="$store.state.search === 'name'"
+        class="col-md-6 d-flex align-items-center"
+      >
+        <input
+          type="text"
+          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          placeholder="Search by name"
+          @input="(e) => getPokemonsByName(e.target.value.toLowerCase())"
+        >
+      </div>
+      <div
+        v-if="$store.state.search === 'id'"
+        class="col-md-6 d-flex align-items-center"
+      >
+        <input
+          type="number"
+          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          placeholder="Search by id"
+          @keyup="(e) => getPokemonsById(parseInt(e.target.value))"
+        >
+      </div>
+      <div
+        v-if="$store.state.search === 'specie'"
+        class="col-md-6 d-flex align-items-center"
+      >
+        <input
+          type="text"
+          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          placeholder="Search by specie"
+        >
+      </div>
+      <div
+        v-if="$store.state.search === 'type'"
+        class="col-md-6 d-flex align-items-center"
+      >
+        <input
+          type="text"
+          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          placeholder="Search by type"
+        >
+      </div>
     </div>
 
-    <div
+    <!-- <div
       v-if="$store.state.language === 'es'"
       class="container text-center mt-5 p-4 bg-light rounded-top"
     >
@@ -135,6 +189,6 @@ const getpokemonsfiltered = (value) => {
           >
         </div>
       </form>
-    </div>
+    </div> -->
   </section>
 </template>
