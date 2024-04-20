@@ -10,9 +10,13 @@ export default createStore({
     language: 'en',
     search: '',
     pokemons: [],
-    filteredPokemons: [],
+    // filteredPokemons: [],
     loading: false,
-    pokemonInfo: ''
+    pokemonInfo: '',
+    morePokemons: {
+      start: 1,
+      end: 13,
+    },
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -24,24 +28,26 @@ export default createStore({
     setPokemons (state, payload) {
       state.pokemons = payload
     },
-    setFilteredPokemons (state, payload) {
-      state.filteredPokemons = payload
-    },
+
+    // setFilteredPokemons (state, payload) {
+    //   state.filteredPokemons = payload
+    // },
+
     setLoading (state, status) {
       state.loading = status
     },
     setPokemonInfo (state, payload) {
       state.pokemonInfo = payload
-    }
+    },
   }, 
   getters: {
     allPokemonsPage(state) {
       return state.pokemons
     },
 
-    allPokemons(state) {
-      return state.filteredPokemons
-    },
+    // allPokemons(state) {
+    //   return state.filteredPokemons
+    // },
 
     getPokemonByName: (state) => (name) => {
       if(name) {
@@ -57,15 +63,19 @@ export default createStore({
     },
     getPokemonBySpecie: (state) => (name) => {
       if(name) {
-        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.name.includes(name))
+        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.species.name.includes(name))
       }
       return state.pokemons
     },
+
+    updateNewPokemonsEnd: (state) => {
+      return state.morePokemons.end += 12
+    }
   }, 
   actions: {
-    async getPokemons ({ commit }) {
+    async getPokemons ({ commit, state }) {
       const urls = []
-      for (let i = 1; i < 22; i++) {
+      for (let i = 1; i < state.morePokemons.end; i++) {
         urls.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
       }
       await axios.all(urls.map((endpoint) => axios.get(endpoint)))
@@ -73,22 +83,20 @@ export default createStore({
         .catch((err) => console.log(err))
     },
 
-    async getAllPokemons ({ commit }) {
-      const urls = []
-      for (let i = 1; i < 750; i++) {
-        urls.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
-      }
-      await axios.all(urls.map((endpoint) => axios.get(endpoint)))
-        .then((res) => commit('setFilteredPokemons', res))
-        .catch((err) => console.log(err))
-    },
+    // async getAllPokemons ({ commit }) {
+    //   const urls = []
+    //   for (let i = 1; i < 750; i++) {
+    //     urls.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
+    //   }
+    //   await axios.all(urls.map((endpoint) => axios.get(endpoint)))
+    //     .then((res) => commit('setFilteredPokemons', res))
+    //     .catch((err) => console.log(err))
+    // },
 
     async getPokemonsInfo ({ commit }, id) {
-      console.log(id)
       const response = await api.get(`/${id}`)
       const data = response.data
-      console.log(data)
       commit('setPokemonInfo', data)
-    }
+    },
   }
 })

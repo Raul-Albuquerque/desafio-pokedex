@@ -1,11 +1,17 @@
 <script setup>
 
+import {onMounted} from 'vue'
+
 import { useStore } from 'vuex'
 
 import PokemonModal from './PokemonModal.vue'
 import { typeColors, bgColors } from '../assets/themes/index.js'
 
 const store = useStore()
+
+onMounted( () => {
+  document.getElementById('scrollContainer').addEventListener('scroll', handleScroll)
+})
 
 const getPokemonId = (id) => {
   store.dispatch('getPokemonsInfo', id)
@@ -21,10 +27,30 @@ const getBgColor = (type) => {
   return bgColors[lowercaseType] || 'gray'
 }
 
+const getMorePokemons = () => {
+  store.getters.updateNewPokemonsEnd
+  store.dispatch('getPokemons')
+}
+
+const handleScroll = async (event) => {
+  let element = event.target
+
+  const scrollPosition = element.scrollTop + element.clientHeight
+  const scrollLimit = element.scrollHeight - 20
+
+  if (scrollPosition >= scrollLimit) {
+    await getMorePokemons()
+  }
+}
+
+
 </script>
 
 <template>
-  <ul class="container infiniteScroll bg-white bg-opacity-75 p-4 d-flex align-items-center justify-content-center flex-wrap gap-4">
+  <ul
+    id="scrollContainer"
+    class="container infiniteScroll bg-white bg-opacity-75 p-4 d-flex align-items-center justify-content-center flex-wrap gap-4"
+  >
     <li
       v-for="pokemon in $store.getters.allPokemonsPage"
       :key="pokemon.data.name"
@@ -35,7 +61,7 @@ const getBgColor = (type) => {
       :style="{ backgroundColor: getBgColor(pokemon.data.types[0].type.name) }"
       @click="getPokemonId(pokemon.data.id)"
     >
-      <h5 class="fs-4 text-secondary">
+      <h5 class="fs-4 text-secondary-10">
         #{{ pokemon.data.id }}
       </h5>
       <img
@@ -105,4 +131,4 @@ const getBgColor = (type) => {
   cursor: pointer;
 }
 
-</style>
+</style>import { onMounted } from 'vue';onMounted, 

@@ -11,7 +11,10 @@ const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
+  store.dispatch('getNewPokemons')
 })
+
+// console.log(store.getters.allPokemonsPage)
 
 </script>
 

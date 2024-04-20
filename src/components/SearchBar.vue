@@ -7,10 +7,10 @@ const state = reactive({
   search: false
 })
 
-onMounted( () => {
-  if (!state.search) 
-    store.dispatch('getAllPokemons')
-})
+// onMounted( () => {
+//   if (!state.search) 
+//     store.dispatch('getAllPokemons')
+// })
 
 const getPokemonsByName = (name) => {
   if (name) {
