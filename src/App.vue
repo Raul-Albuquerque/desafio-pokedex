@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
-import PokemonsList from './components/PokemonsList.vue'
+import PokemonCard from './components/PokemonCard.vue'
 
 const store = useStore()
 
@@ -17,10 +17,9 @@ onMounted( () => {
 
 <template>
   <Header />
-  <!-- <PokemonListTest /> -->
   <SearchBar />
   <Suspense>
-    <PokemonsList />
+    <PokemonCard />
     <template #fallback>
       <p>Loading...</p>
     </template>
