@@ -1,5 +1,12 @@
 <script setup>
 
+import PokemonModal from './PokemonModal.vue'
+import { typeColors } from '../assets/themes/index.js'
+
+const getTypeColor = (type) => {
+  const lowercaseType = type.toLowerCase()
+  return typeColors[lowercaseType] || 'gray'
+}
 
 </script>
 
@@ -45,8 +52,14 @@
                   <span
                     v-for="typeInfo in $store.state.pokemonInfo.types"
                     :key="typeInfo.type.name"
-                    class="badge border border-secondary p-2 text-secondary me-2 text-capitalize"
+                    class="badge p-2 me-2 text-capitalize"
+                    :style="{ backgroundColor: getTypeColor(typeInfo.type.name)}"
                   >
+                    <img
+                      :src="`/assets/typeIcons/${typeInfo.type.name}.png`"
+                      alt="Pokemon type icon"
+                      class="type-icon"
+                    >
                     {{ typeInfo.type.name }}
                   </span>
                 </div>
@@ -95,7 +108,7 @@
               <hr>
               <div class="row text-center">
                 <h4 class="mb-3 text-start">
-                  Evolution
+                  Evolutions
                 </h4>
                 <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap" />
               </div>
@@ -115,21 +128,6 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-            >
-              Save changes
-            </button>
           </div>
         </div>
       </div>
