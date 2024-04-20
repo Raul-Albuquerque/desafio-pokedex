@@ -10,7 +10,7 @@ export default createStore({
     language: 'en',
     search: '',
     pokemons: [],
-    filteredPokemons: []
+    filteredPokemons: [],
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -27,9 +27,14 @@ export default createStore({
     }
   }, 
   getters: {
-    allPokemons(state) {
+    allPokemonsPage(state) {
       return state.pokemons
     },
+
+    allPokemons(state) {
+      return state.filteredPokemons
+    },
+
     getPokemonByName: (state) => (name) => {
       if(name) {
         return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.name.includes(name))
@@ -41,7 +46,13 @@ export default createStore({
         return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.id == id)
       }
       return state.pokemons
-    }
+    },
+    getPokemonBySpecie: (state) => (name) => {
+      if(name) {
+        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.name.includes(name))
+      }
+      return state.pokemons
+    },
   }, 
   actions: {
     async getPokemons ({ commit }) {
@@ -53,5 +64,15 @@ export default createStore({
         .then((res) => commit('setPokemons', res))
         .catch((err) => console.log(err))
     },
+
+    async getAllPokemons ({ commit }) {
+      const urls = []
+      for (let i = 1; i < 750; i++) {
+        urls.push(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      }
+      await axios.all(urls.map((endpoint) => axios.get(endpoint)))
+        .then((res) => commit('setFilteredPokemons', res))
+        .catch((err) => console.log(err))
+    }
   }
 })

@@ -1,9 +1,4 @@
 <script setup>
-import { useStore } from 'vuex'
-
-const store = useStore()
-
-
 </script>
 
 <template>
@@ -12,7 +7,7 @@ const store = useStore()
     class="infiniteScroll container d-flex align-items-center justify-content-around flex-wrap gap-5 py-5 bg-black bg-opacity-75"
   >
     <li
-      v-for="pokemon in $store.getters.allPokemons"
+      v-for="pokemon in $store.getters.allPokemonsPage"
       :key="pokemon.data.name"
       class="col-md-3 d-inline-flex align-items-center justify-content-start bg-secondary bg-opacity-25 rounded py-4 px-3 position-relative pointer"
     >
@@ -27,8 +22,7 @@ const store = useStore()
             :key="typeInfo.type.name"
             class="badge text-bg-success p-2 text-wrap me-2 text-capitalize"
           >
-            <!-- <img src="/images/leaf.svg">  -->
-            {{ typeInfo.type.name }}
+            <img src="/images/leaf.svg"> {{ typeInfo.type.name }}
           </span>
         </div>
       </div>

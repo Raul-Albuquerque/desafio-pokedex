@@ -1,9 +1,16 @@
 <script setup>
-
-
 import { useStore } from 'vuex'
+import { onMounted, reactive } from 'vue'
 
 const store = useStore()
+const state = reactive({
+  search: false
+})
+
+onMounted( () => {
+  if (!state.search) 
+    store.dispatch('getAllPokemons')
+})
 
 const getPokemonsByName = (name) => {
   if (name) {
@@ -14,11 +21,20 @@ const getPokemonsByName = (name) => {
   }
 }
 
+const getPokemonsBySpecie = (specie) => {
+  if (specie) {
+    console.log(specie)
+    store.getters.getPokemonBySpecie(specie)
+  } else {
+    store.dispatch('getPokemons')
+  }
+}
+
 const getPokemonsById = (id) => {
   if (id) {
     console.log(id)
     store.getters.getPokemonById(id)
-  } else {
+  }else {
     store.dispatch('getPokemons')
   }
 }
@@ -75,7 +91,7 @@ const getPokemonsById = (id) => {
           type="text"
           class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
           placeholder="Search by name"
-          @input="(e) => getPokemonsByName(e.target.value.toLowerCase())"
+          @keyup="(e) => getPokemonsByName(e.target.value.toLowerCase())"
         >
       </div>
       <div
@@ -97,6 +113,7 @@ const getPokemonsById = (id) => {
           type="text"
           class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
           placeholder="Search by specie"
+          @keyup="(e) => getPokemonsBySpecie(e.target.value.toLowerCase())"
         >
       </div>
       <div
