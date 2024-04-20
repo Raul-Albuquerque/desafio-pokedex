@@ -12,7 +12,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h1
@@ -29,71 +29,108 @@
           />
         </div>
         <div class="modal-body">
-          <img
-            class="rounded mx-auto d-block custom-image"
-            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${$store.state.pokemonInfo.id}.png`"
-          >
-          <p />
-          <hr>
-          <div>
-            <p class="d-inline-flex gap-1">
-              <a
-                class="btn btn-primary"
-                data-bs-toggle="collapse"
-                href="#multiCollapseExample1"
-                role="button"
-                aria-expanded="false"
-                aria-controls="multiCollapseExample1"
-              >Ataques</a>
-              <button
-                class="btn btn-primary"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#multiCollapseExample2"
-                aria-expanded="false"
-                aria-controls="multiCollapseExample2"
-              >
-                Evoluções
-              </button>
-            </p>
+          <div class="container-fluid">
             <div class="row">
-              <div class="col">
-                <div
-                  id="multiCollapseExample1"
-                  class="collapse multi-collapse"
+              <div class="col-md-6 text-center">
+                <img
+                  class="rounded mx-auto d-block custom-image"
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${$store.state.pokemonInfo.id}.png`"
                 >
-                  <div class="card card-body">
-                    Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+              </div>
+              <div class="col-md-6 text-center d-flex align-items-center justify-content-center gap-2">
+                <div v-if="$store.state.pokemonInfo.types">
+                  <h4 class="mb-3">
+                    Types
+                  </h4>
+                  <span
+                    v-for="typeInfo in $store.state.pokemonInfo.types"
+                    :key="typeInfo.type.name"
+                    class="badge border border-secondary p-2 text-secondary me-2 text-capitalize"
+                  >
+                    {{ typeInfo.type.name }}
+                  </span>
+                </div>
+              </div>
+              <hr>
+              <div class="row text-center">
+                <h4 class="mb-3">
+                  Sprites
+                </h4>
+                <div class="row">
+                  <img
+                    class="col-md-3 rounded mx-auto d-block"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${$store.state.pokemonInfo.id}.png`"
+                  >
+                  <img
+                    class="col-md-3 rounded mx-auto d-block"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${$store.state.pokemonInfo.id}.png`"
+                  >
+                  <img
+                    class="col-md-3 rounded mx-auto d-block"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${$store.state.pokemonInfo.id}.png`"
+                  >
+                  <img
+                    class="col-md-3 rounded mx-auto d-block"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${$store.state.pokemonInfo.id}.png`"
+                  >
+                </div>
+              </div>
+              <hr>
+              <div class="row text-center mb-3">
+                <h4 class="mb-3">
+                  Attack Moves
+                </h4>
+                <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
+                  <div v-if="$store.state.pokemonInfo.types">
+                    <span
+                      v-for="move in $store.state.pokemonInfo.moves"
+                      :key="move.move.name"
+                      class="badge border border-secondary p-1 text-secondary m-1 text-capitalize"
+                    >
+                      {{ move.move.name }}
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div
-                  id="multiCollapseExample2"
-                  class="collapse multi-collapse"
-                >
-                  <div class="card card-body">
-                    Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                  </div>
+              <hr>
+              <div class="row text-center">
+                <h4 class="mb-3 text-start">
+                  Evolution
+                </h4>
+                <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap" />
+              </div>
+              <hr>
+              <div class="row text-center">
+                <h4 class="mb-3 text-start">
+                  Game Indices
+                </h4>
+                <div v-if="$store.state.pokemonInfo.game_indices">
+                  <span
+                    v-for="game in $store.state.pokemonInfo.game_indices"
+                    :key="game.version.name"
+                    class="badge border border-secondary p-1 text-secondary m-1 text-capitalize"
+                  >
+                    {{ game.version.name }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-          >
-            Save changes
-          </button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+            >
+              Save changes
+            </button>
+          </div>
         </div>
       </div>
     </div>

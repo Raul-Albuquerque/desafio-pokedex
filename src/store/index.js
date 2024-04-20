@@ -11,6 +11,8 @@ export default createStore({
     search: '',
     pokemons: [],
     filteredPokemons: [],
+    loading: false,
+    pokemonInfo: ''
   },
   mutations: {
     changeLanguage (state, payload) {
@@ -24,6 +26,12 @@ export default createStore({
     },
     setFilteredPokemons (state, payload) {
       state.filteredPokemons = payload
+    },
+    setLoading (state, status) {
+      state.loading = status
+    },
+    setPokemonInfo (state, payload) {
+      state.pokemonInfo = payload
     }
   }, 
   getters: {
@@ -73,6 +81,14 @@ export default createStore({
       await axios.all(urls.map((endpoint) => axios.get(endpoint)))
         .then((res) => commit('setFilteredPokemons', res))
         .catch((err) => console.log(err))
+    },
+
+    async getPokemonsInfo ({ commit }, id) {
+      console.log(id)
+      const response = await api.get(`/${id}`)
+      const data = response.data
+      console.log(data)
+      commit('setPokemonInfo', data)
     }
   }
 })

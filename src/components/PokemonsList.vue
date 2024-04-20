@@ -1,4 +1,15 @@
 <script setup>
+
+import { useStore } from 'vuex'
+
+import PokemonModal from './PokemonModal.vue'
+
+const store = useStore()
+
+const getPokemonId = (id) => {
+  store.dispatch('getPokemonsInfo', id)
+}
+
 </script>
 
 <template>
@@ -10,6 +21,9 @@
       v-for="pokemon in $store.getters.allPokemonsPage"
       :key="pokemon.data.name"
       class="col-md-3 d-inline-flex align-items-center justify-content-start bg-secondary bg-opacity-25 rounded py-4 px-3 position-relative pointer"
+      data-bs-toggle="modal"
+      data-bs-target="#pokemonModal"
+      @click="getPokemonId(pokemon.data.id)"
     >
       <div class="d-block text-white me-2">
         <h5>#{{ pokemon.data.id }}</h5>
@@ -22,7 +36,7 @@
             :key="typeInfo.type.name"
             class="badge text-bg-success p-2 text-wrap me-2 text-capitalize"
           >
-            <img src="/images/leaf.svg"> {{ typeInfo.type.name }}
+            {{ typeInfo.type.name }}
           </span>
         </div>
       </div>
@@ -34,7 +48,7 @@
       </div>
     </li>
   </ul>
-  <!-- <PokemonModal /> -->
+  <PokemonModal />
 </template>
 
 <style scoped>
