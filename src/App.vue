@@ -5,16 +5,16 @@ import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
 import SearchBar from './components/SearchBar.vue'
-import PokemonsList from './components/PokemonsList.vue'
+import PokemonCard from './components/PokemonCard.vue'
 
 const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
-    .then(() => {
-      
-    })
+  store.dispatch('getNewPokemons')
 })
+
+// console.log(store.getters.allPokemonsPage)
 
 </script>
 
@@ -22,7 +22,7 @@ onMounted( () => {
   <Header />
   <SearchBar />
   <Suspense>
-    <PokemonsList />
+    <PokemonCard />
     <template #fallback>
       <p>Loading...</p>
     </template>
