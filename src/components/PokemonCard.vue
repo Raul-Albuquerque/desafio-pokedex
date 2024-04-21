@@ -13,7 +13,9 @@ onMounted( () => {
   document.getElementById('scrollContainer').addEventListener('scroll', handleScroll)
 })
 
-const getPokemonId = (id) => {
+
+
+const getPokemonInfo = (id) => {
   store.dispatch('getPokemonsInfo', id)
 }
 
@@ -42,8 +44,6 @@ const handleScroll = async (event) => {
     await getMorePokemons()
   }
 }
-
-
 </script>
 
 <template>
@@ -59,7 +59,7 @@ const handleScroll = async (event) => {
       data-bs-toggle="modal"
       data-bs-target="#pokemonModal"
       :style="{ backgroundColor: getBgColor(pokemon.data.types[0].type.name) }"
-      @click="getPokemonId(pokemon.data.id)"
+      @click="getPokemonInfo(pokemon.data.id)"
     >
       <h5 class="fs-4 text-secondary-10">
         #{{ pokemon.data.id }}

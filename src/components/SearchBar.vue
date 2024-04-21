@@ -3,9 +3,7 @@ import { useStore } from 'vuex'
 import { onMounted, reactive } from 'vue'
 
 const store = useStore()
-const state = reactive({
-  search: false
-})
+
 
 // onMounted( () => {
 //   if (!state.search) 
@@ -14,7 +12,6 @@ const state = reactive({
 
 const getPokemonsByName = (name) => {
   if (name) {
-    console.log(name)
     store.getters.getPokemonByName(name)
   } else {
     store.dispatch('getPokemons')
@@ -23,7 +20,6 @@ const getPokemonsByName = (name) => {
 
 const getPokemonsBySpecie = (specie) => {
   if (specie) {
-    console.log(specie)
     store.getters.getPokemonBySpecie(specie)
   } else {
     store.dispatch('getPokemons')
@@ -32,9 +28,16 @@ const getPokemonsBySpecie = (specie) => {
 
 const getPokemonsById = (id) => {
   if (id) {
-    console.log(id)
     store.getters.getPokemonById(id)
   }else {
+    store.dispatch('getPokemons')
+  }
+}
+
+const getPokemonsByType = (type) => {
+  if (type) {
+    store.getters.getPokemonsByType(type)
+  } else {
     store.dispatch('getPokemons')
   }
 }
@@ -85,46 +88,107 @@ const getPokemonsById = (id) => {
       </div>
       <div
         v-if="$store.state.search === 'name'"
-        class="col-md-6 d-flex align-items-center"
+        class="col-md-12 d-flex align-items-center"
       >
         <input
           type="text"
-          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          class="form-control mt-3 bg-secondary bg-opacity-25"
           placeholder="Search by name"
           @keyup="(e) => getPokemonsByName(e.target.value.toLowerCase())"
         >
       </div>
       <div
         v-if="$store.state.search === 'id'"
-        class="col-md-6 d-flex align-items-center"
+        class="col-md-12 d-flex align-items-center"
       >
         <input
           type="number"
-          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          class="form-control mt-3 bg-secondary bg-opacity-25"
           placeholder="Search by id"
           @keyup="(e) => getPokemonsById(parseInt(e.target.value))"
         >
       </div>
       <div
         v-if="$store.state.search === 'specie'"
-        class="col-md-6 d-flex align-items-center"
+        class="col-md-12 d-flex align-items-center"
       >
         <input
           type="text"
-          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
+          class="form-control mt-3 bg-secondary bg-opacity-25"
           placeholder="Search by specie"
           @keyup="(e) => getPokemonsBySpecie(e.target.value.toLowerCase())"
         >
       </div>
       <div
         v-if="$store.state.search === 'type'"
-        class="col-md-6 d-flex align-items-center"
+        id="app"
       >
-        <input
-          type="text"
-          class="form-control col-md-6 mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by type"
+        <select
+          class="form-select col-6 mt-3 bg-secondary bg-opacity-25"
+          aria-label="Small select example"
+          @change="(e) => getPokemonsByType(e.target.value)"
         >
+          <option
+            selected
+            disabled
+          >
+            Select the type
+          </option>
+          <option value="grass">
+            Grass
+          </option>
+          <option value="bug">
+            Bug
+          </option>
+          <option value="fire">
+            Fire
+          </option>
+          <option value="normal">
+            Normal
+          </option>
+          <option value="water">
+            Water
+          </option>
+          <option value="electric">
+            Electric
+          </option>
+          <option value="ice">
+            Ice
+          </option>
+          <option value="fighting">
+            Fighting
+          </option>
+          <option value="poison">
+            Poison
+          </option>
+          <option value="ground">
+            Ground
+          </option>
+          <option value="flying">
+            Flying
+          </option>
+          <option value="psychic">
+            Psychic
+          </option>
+          <option value="rock">
+            Rock
+          </option>
+          <option value="ghost">
+            Ghost
+          </option>
+          <option value="dragon">
+            Dragon
+          </option>
+          <option value="dark">
+            Dark
+          </option>
+          <option value="steel">
+            Steel
+          </option>
+          <option value="fairy">
+            Fairy
+          </option>
+        </select>
       </div>
     </div>
 

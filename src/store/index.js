@@ -10,7 +10,7 @@ export default createStore({
     language: 'en',
     search: '',
     pokemons: [],
-    // filteredPokemons: [],
+    filteredPokemons: [],
     loading: false,
     pokemonInfo: '',
     morePokemons: {
@@ -29,9 +29,8 @@ export default createStore({
       state.pokemons = payload
     },
 
-    // setFilteredPokemons (state, payload) {
-    //   state.filteredPokemons = payload
-    // },
+    setFilteredPokemons (state, payload) {
+      state.filteredPokemons.push(payload)    },
 
     setLoading (state, status) {
       state.loading = status
@@ -55,17 +54,43 @@ export default createStore({
       }
       return state.pokemons
     },
+
     getPokemonById: (state) => (id) => {
       if(id) {
         return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.id == id)
       }
       return state.pokemons
     },
-    getPokemonBySpecie: (state) => (name) => {
-      if(name) {
-        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.species.name.includes(name))
+
+    getPokemonBySpecie: (state) => (specie) => {
+      if(specie) {
+        return state.pokemons = state.pokemons.filter(pokemon => pokemon.data.species.name.includes(specie))
       }
       return state.pokemons
+    },
+
+    getPokemonsByType: (state) => (typeSearched) => {
+      let exist = false
+
+      state.pokemons.forEach(pokemon => {
+        const types = pokemon.data.types.map(type => type.type.name)
+
+        if(types[1] != undefined) {
+          if(types[0].includes(typeSearched)) {
+            return exist = true
+          }
+        } else if(types[0].includes(typeSearched)) {
+          return exist = true
+        }
+
+        if (exist) {
+          if (state.filteredPokemons.includes(pokemon)) {
+            return state.filteredPokemons.push(pokemon)
+          }
+          return state.filteredPokemons
+        }         
+      })
+      console.log(state.filteredPokemons)
     },
 
     updateNewPokemonsEnd: (state) => {
