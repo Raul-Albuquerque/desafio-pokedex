@@ -70,27 +70,9 @@ export default createStore({
     },
 
     getPokemonsByType: (state) => (typeSearched) => {
-      let exist = false
-
-      state.pokemons.forEach(pokemon => {
-        const types = pokemon.data.types.map(type => type.type.name)
-
-        if(types[1] != undefined) {
-          if(types[0].includes(typeSearched)) {
-            return exist = true
-          }
-        } else if(types[0].includes(typeSearched)) {
-          return exist = true
-        }
-
-        if (exist) {
-          if (state.filteredPokemons.includes(pokemon)) {
-            return state.filteredPokemons.push(pokemon)
-          }
-          return state.filteredPokemons
-        }         
+      return state.pokemons = state.pokemons.filter(poke => {
+        return poke.data.types.some(type => type.type.name.includes(typeSearched))
       })
-      console.log(state.filteredPokemons)
     },
 
     updateNewPokemonsEnd: (state) => {

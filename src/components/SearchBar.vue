@@ -3,8 +3,6 @@ import { useStore } from 'vuex'
 import { onMounted, reactive } from 'vue'
 
 const store = useStore()
-
-
 // onMounted( () => {
 //   if (!state.search) 
 //     store.dispatch('getAllPokemons')

@@ -13,8 +13,6 @@ onMounted( () => {
   document.getElementById('scrollContainer').addEventListener('scroll', handleScroll)
 })
 
-
-
 const getPokemonInfo = (id) => {
   store.dispatch('getPokemonsInfo', id)
 }
