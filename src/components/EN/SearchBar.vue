@@ -1,18 +1,13 @@
 <script setup>
 import { useStore } from 'vuex'
-import { onMounted, reactive } from 'vue'
 
 const store = useStore()
-// onMounted( () => {
-//   if (!state.search) 
-//     store.dispatch('getAllPokemons')
-// })
 
 const getPokemonsByName = (name) => {
   if (name) {
     store.getters.getPokemonByName(name)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -20,7 +15,7 @@ const getPokemonsBySpecie = (specie) => {
   if (specie) {
     store.getters.getPokemonBySpecie(specie)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -28,7 +23,7 @@ const getPokemonsById = (id) => {
   if (id) {
     store.getters.getPokemonById(id)
   }else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -36,7 +31,7 @@ const getPokemonsByType = (type) => {
   if (type) {
     store.getters.getPokemonsByType(type)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
