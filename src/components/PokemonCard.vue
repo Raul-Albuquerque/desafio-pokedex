@@ -4,7 +4,10 @@ import {onMounted} from 'vue'
 
 import { useStore } from 'vuex'
 
-import PokemonModal from './PokemonModal.vue'
+import PokemonModalEN from './EN/PokemonModal.vue'
+import PokemonModalES from './ES/PokemonModal.vue'
+import PokemonModalPT from './PT/PokemonModal.vue'
+
 import { typeColors, bgColors } from '../assets/themes/index.js'
 
 const store = useStore()
@@ -15,6 +18,7 @@ onMounted( () => {
 
 const getPokemonInfo = (id) => {
   store.dispatch('getPokemonsInfo', id)
+  store.dispatch('getPokemonsEvolution', id)
 }
 
 const getTypeColor = (type) => {
@@ -92,14 +96,16 @@ const handleScroll = async (event) => {
       </div>
     </li>
   </ul>
-  <PokemonModal />
+  <PokemonModalEN v-if="$store.state.language == 'en'" />
+  <PokemonModalES v-if="$store.state.language == 'es'" />
+  <PokemonModalPT v-if="$store.state.language == 'pt'" />
 </template>
 
 <style scoped>
 .infiniteScroll {
     margin: 0 auto;
     list-style: none;
-    height: 70dvh;
+    height: 80vh;
     padding: 12px 20px;
     overflow-y: scroll;
     scrollbar-width: thin;

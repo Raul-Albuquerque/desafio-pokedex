@@ -1,7 +1,6 @@
 <script setup>
 
-import PokemonModal from './PokemonModal.vue'
-import { typeColors } from '../assets/themes/index.js'
+import { typeColors } from '@/assets/themes/index.js'
 
 const getTypeColor = (type) => {
   const lowercaseType = type.toLowerCase()
@@ -11,7 +10,6 @@ const getTypeColor = (type) => {
 </script>
 
 <template>
-  <!-- Modal -->
   <div
     id="pokemonModal"
     class="modal fade"
@@ -47,7 +45,7 @@ const getTypeColor = (type) => {
               <div class="col-md-6 text-center d-flex align-items-center justify-content-center gap-2">
                 <div v-if="$store.state.pokemonInfo.types">
                   <h4 class="mb-3">
-                    Types
+                    Tipos
                   </h4>
                   <span
                     v-for="typeInfo in $store.state.pokemonInfo.types"
@@ -91,7 +89,7 @@ const getTypeColor = (type) => {
               <hr>
               <div class="row text-center mb-3">
                 <h4 class="mb-3">
-                  Attack Moves
+                  Movimientos de Ataque
                 </h4>
                 <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
                   <div v-if="$store.state.pokemonInfo.types">
@@ -108,14 +106,25 @@ const getTypeColor = (type) => {
               <hr>
               <div class="row text-center">
                 <h4 class="mb-3 text-start">
-                  Evolutions
+                  Evoluciones
                 </h4>
-                <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap" />
+                <img
+                  class="col-md-3 rounded mx-auto d-block"
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${$store.state.pokemonInfo.id}.png`"
+                >
+                <img
+                  class="col-md-3 rounded mx-auto d-block"
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${$store.state.pokemonInfo.id}.png`"
+                >
+                <img
+                  class="col-md-3 rounded mx-auto d-block"
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${$store.state.pokemonInfo.id}.png`"
+                >
               </div>
               <hr>
               <div class="row text-center">
                 <h4 class="mb-3 text-start">
-                  Game Indices
+                  Índices de Juego
                 </h4>
                 <div v-if="$store.state.pokemonInfo.game_indices">
                   <span

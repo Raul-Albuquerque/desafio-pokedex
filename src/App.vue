@@ -1,10 +1,11 @@
 <script setup>
 import { onMounted } from 'vue'
-
 import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
-import SearchBar from './components/SearchBar.vue'
+import SearchBarEN from './components/EN/SearchBar.vue'
+import SearchBarES from './components/ES/SearchBar.vue'
+import SearchBarPT from './components/PT/SearchBar.vue'
 import PokemonCard from './components/PokemonCard.vue'
 
 const store = useStore()
@@ -20,11 +21,8 @@ onMounted( () => {
 
 <template>
   <Header />
-  <SearchBar />
-  <Suspense>
-    <PokemonCard />
-    <template #fallback>
-      <p>Loading...</p>
-    </template>
-  </Suspense>
+  <SearchBarES v-if="$store.state.language == 'es'" />
+  <SearchBarPT v-if="$store.state.language == 'pt'" />
+  <SearchBarEN v-if="$store.state.language == 'en'" />
+  <PokemonCard />
 </template>

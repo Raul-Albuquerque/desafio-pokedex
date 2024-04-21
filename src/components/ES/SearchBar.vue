@@ -45,14 +45,13 @@ const getPokemonsByType = (type) => {
 <template>
   <section class="pt-2">
     <div
-      v-if="$store.state.language === 'en'"
       class="container text-center mt-5 p-4 bg-light rounded-top"
     >
       <h2 class="">
-        Find Pokémon
+        Encontrar Pokemon
       </h2>
       <p class="">
-        Search your favorite pokémon by name, id, type or specie.
+        Busca tu pokémon favorito por nombre, id, tipo o especie.
       </p>
       <div>
         <button
@@ -60,28 +59,28 @@ const getPokemonsByType = (type) => {
           type="button"
           @click="$store.commit('changeInput', 'name')"
         >
-          Name
+          NOMBRE
         </button>
         <button
           class="btn btn-primary me-2"
           type="button"
           @click="$store.commit('changeInput', 'id')"
         >
-          Id
+          ID
         </button>
         <button
           class="btn btn-primary me-2"
           type="button"
           @click="$store.commit('changeInput', 'type')"
         >
-          Type
+          TIPO
         </button>
         <button
           class="btn btn-primary me-2"
           type="button"
           @click="$store.commit('changeInput', 'specie')"
         >
-          Specie
+          ESPECIES
         </button>
       </div>
       <div
@@ -91,7 +90,7 @@ const getPokemonsByType = (type) => {
         <input
           type="text"
           class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by name"
+          placeholder="Buscar por nombre"
           @keyup="(e) => getPokemonsByName(e.target.value.toLowerCase())"
         >
       </div>
@@ -102,7 +101,7 @@ const getPokemonsByType = (type) => {
         <input
           type="number"
           class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by id"
+          placeholder="Search by ID"
           @keyup="(e) => getPokemonsById(parseInt(e.target.value))"
         >
       </div>
@@ -113,7 +112,7 @@ const getPokemonsByType = (type) => {
         <input
           type="text"
           class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by specie"
+          placeholder="Buscar por especie"
           @keyup="(e) => getPokemonsBySpecie(e.target.value.toLowerCase())"
         >
       </div>
@@ -130,144 +129,64 @@ const getPokemonsByType = (type) => {
             selected
             disabled
           >
-            Select the type
+            Selecciona el tipo
           </option>
           <option value="grass">
-            Grass
+            Planta
           </option>
           <option value="bug">
-            Bug
+            Bicho
           </option>
           <option value="fire">
-            Fire
+            Fuego
           </option>
           <option value="normal">
             Normal
           </option>
           <option value="water">
-            Water
+            Agua
           </option>
           <option value="electric">
-            Electric
+            Eléctrico
           </option>
           <option value="ice">
-            Ice
+            Hielo
           </option>
           <option value="fighting">
-            Fighting
+            Lucha
           </option>
           <option value="poison">
-            Poison
+            Veneno
           </option>
           <option value="ground">
-            Ground
+            Tierra
           </option>
           <option value="flying">
-            Flying
+            Volador
           </option>
           <option value="psychic">
-            Psychic
+            Psíquico
           </option>
           <option value="rock">
-            Rock
+            Roca
           </option>
           <option value="ghost">
-            Ghost
+            Fantasma
           </option>
           <option value="dragon">
-            Dragon
+            Dragón
           </option>
           <option value="dark">
-            Dark
+            Siniestro
           </option>
           <option value="steel">
-            Steel
+            Acero
           </option>
           <option value="fairy">
-            Fairy
+            Fada
           </option>
         </select>
       </div>
     </div>
-
-    <!-- <div
-      v-if="$store.state.language === 'es'"
-      class="container text-center mt-5 p-4 bg-light rounded-top"
-    >
-      <h2 class="">
-        Encontrar el pokemon
-      </h2>
-      <p class="">
-        Busca tu pokemon favorito por nombre, id, tipo o especie.
-      </p>
-      <form class="row p-2">
-        <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
-        >
-          <option selected>
-            Buscar
-          </option>
-          <option value="1">
-            Nombre
-          </option>
-          <option value="2">
-            Id
-          </option>
-          <option value="3">
-            Tipo
-          </option>
-          <option value="4">
-            Especie
-          </option>
-        </select>
-        <div class="col-md-4">
-          <input
-            id="name"
-            type="text"
-            class="form-control bg-secondary bg-opacity-25"
-          >
-        </div>
-      </form>
-    </div>
-
-    <div
-      v-if="$store.state.language === 'pt'"
-      class="container text-center mt-5 p-4 bg-light rounded-top"
-    >
-      <h2 class="">
-        Encontre o pokémon
-      </h2>
-      <p class="">
-        Pesquise o seu pokémon favorito pelo nome, id, tipo ou espécie.
-      </p>
-      <form class="row p-2">
-        <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
-        >
-          <option selected>
-            Pesquisar por
-          </option>
-          <option value="1">
-            Nome
-          </option>
-          <option value="2">
-            Id
-          </option>
-          <option value="3">
-            Tipo
-          </option>
-          <option value="4">
-            Espécie
-          </option>
-        </select>
-        <div class="col-md-4">
-          <input
-            id="name"
-            type="text"
-            class="form-control bg-secondary bg-opacity-25"
-          >
-        </div>
-      </form>
-    </div> -->
   </section>
 </template>
