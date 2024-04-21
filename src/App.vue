@@ -12,7 +12,7 @@ const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
-  // store.dispatch('getNewPokemons')
+  store.dispatch('getAllPokemons')
 })
 
 // console.log(store.getters.allPokemonsPage)
