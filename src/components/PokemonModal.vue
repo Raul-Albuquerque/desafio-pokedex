@@ -1,20 +1,22 @@
 <script setup>
+import {onMounted} from 'vue'
+import { useStore } from 'vuex'
 
-import PokemonModal from './PokemonModal.vue'
-import { typeColors } from '../assets/themes/index.js'
+import { typeColors } from '@/assets/themes/index.js'
 
 const getTypeColor = (type) => {
   const lowercaseType = type.toLowerCase()
   return typeColors[lowercaseType] || 'gray'
 }
 
+const store = useStore()
+
 </script>
 
 <template>
-  <!-- Modal -->
   <div
     id="pokemonModal"
-    class="modal fade"
+    class="modal fade modalControl"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -44,10 +46,10 @@ const getTypeColor = (type) => {
                   :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${$store.state.pokemonInfo.id}.png`"
                 >
               </div>
-              <div class="col-md-6 text-center d-flex align-items-center justify-content-center gap-2">
+              <div class="col-md-6 text-center d-flex align-items-center justify-content-center gap-2 pb-3">
                 <div v-if="$store.state.pokemonInfo.types">
                   <h4 class="mb-3">
-                    Types
+                    {{ $t('pokemonModal.types') }}
                   </h4>
                   <span
                     v-for="typeInfo in $store.state.pokemonInfo.types"
@@ -65,36 +67,39 @@ const getTypeColor = (type) => {
                 </div>
               </div>
               <hr>
-              <div class="row text-center">
+              <div class="row text-start pb-3">
                 <h4 class="mb-3">
-                  Sprites
+                  {{ $t('pokemonModal.sprites') }}
                 </h4>
                 <div class="row">
                   <img
-                    class="col-md-3 rounded mx-auto d-block"
-                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${$store.state.pokemonInfo.id}.png`"
-                  >
-                  <img
-                    class="col-md-3 rounded mx-auto d-block"
-                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${$store.state.pokemonInfo.id}.png`"
-                  >
-                  <img
-                    class="col-md-3 rounded mx-auto d-block"
+                    class="col-md-3 rounded mx-auto d-block sprite-image"
                     :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${$store.state.pokemonInfo.id}.png`"
                   >
                   <img
-                    class="col-md-3 rounded mx-auto d-block"
+                    class="col-md-3 rounded mx-auto d-block sprite-image"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${$store.state.pokemonInfo.id}.png`"
+                  >
+                  <img
+                    class="col-md-3 rounded mx-auto d-block sprite-image"
                     :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${$store.state.pokemonInfo.id}.png`"
+                  >
+                  <img
+                    class="col-md-3 rounded mx-auto d-block sprite-image"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${$store.state.pokemonInfo.id}.png`"
                   >
                 </div>
               </div>
               <hr>
-              <div class="row text-center mb-3">
+              <div class="row text-start mb-3 pb-3">
                 <h4 class="mb-3">
-                  Attack Moves
+                  {{ $t('pokemonModal.attackMoves') }}
                 </h4>
-                <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap">
-                  <div v-if="$store.state.pokemonInfo.types">
+                <div class="col-md-12 text-center">
+                  <div
+                    v-if="$store.state.pokemonInfo.types"
+                    class="d-flex align-items-center justify-content-between flex-wrap"
+                  >
                     <span
                       v-for="move in $store.state.pokemonInfo.moves"
                       :key="move.move.name"
@@ -106,25 +111,51 @@ const getTypeColor = (type) => {
                 </div>
               </div>
               <hr>
-              <div class="row text-center">
-                <h4 class="mb-3 text-start">
-                  Evolutions
+              <div
+                class="
+                row"
+              >
+                <h4 class="mb-3">
+                  {{ $t('pokemonModal.evolutions') }}
                 </h4>
-                <div class="col-md-12 text-center d-flex align-items-center justify-content-center gap-3 flex-wrap" />
+              </div>
+              <div
+                v-for="pokemon in $store.state.evolutionChain"
+                :key="pokemon.name"
+                class="row pb-2"
+              >
+                <div class="col-md-6 text-end d-flex align-items-center justify-content-end gap-2">
+                  <img
+                    class="rounded d-block evolution-image"
+                    :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`"
+                  >
+                </div>
+                <div class="col-md-6 text-center d-flex align-items-center gap-2">
+                  <div>
+                    <h5 class="mb-3 text-capitalize">
+                      {{ pokemon.name }}
+                    </h5>
+                  </div>
+                </div>
               </div>
               <hr>
-              <div class="row text-center">
-                <h4 class="mb-3 text-start">
-                  Game Indices
-                </h4>
-                <div v-if="$store.state.pokemonInfo.game_indices">
-                  <span
-                    v-for="game in $store.state.pokemonInfo.game_indices"
-                    :key="game.version.name"
-                    class="badge border border-secondary p-1 text-secondary m-1 text-capitalize"
+              <div class="row text-start">
+                <div class="row">
+                  <h4 class="mb-3">
+                    {{ $t('pokemonModal.gameIndices') }}
+                  </h4>
+                  <div
+                    v-if="$store.state.pokemonInfo.game_indices"
+                    class="d-flex align-items-center justify-content-between flex-wrap"
                   >
-                    {{ game.version.name }}
-                  </span>
+                    <span
+                      v-for="game in $store.state.pokemonInfo.game_indices"
+                      :key="game.version.name"
+                      class="badge border border-secondary p-1 text-secondary m-1 text-capitalize"
+                    >
+                      {{ game.version.name }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,6 +170,16 @@ const getTypeColor = (type) => {
 .custom-image {
   width: 160px;
   height: 160px;
+}
+
+.evolution-image {
+  width: 100px;
+  height: 100px;
+}
+
+.sprite-image {
+  max-width: 100px;
+  width: 100%;
 }
 
 </style>

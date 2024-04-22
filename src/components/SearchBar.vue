@@ -1,18 +1,13 @@
 <script setup>
 import { useStore } from 'vuex'
-import { onMounted, reactive } from 'vue'
 
 const store = useStore()
-// onMounted( () => {
-//   if (!state.search) 
-//     store.dispatch('getAllPokemons')
-// })
 
 const getPokemonsByName = (name) => {
   if (name) {
     store.getters.getPokemonByName(name)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -20,7 +15,7 @@ const getPokemonsBySpecie = (specie) => {
   if (specie) {
     store.getters.getPokemonBySpecie(specie)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -28,7 +23,7 @@ const getPokemonsById = (id) => {
   if (id) {
     store.getters.getPokemonById(id)
   }else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
 
@@ -36,238 +31,158 @@ const getPokemonsByType = (type) => {
   if (type) {
     store.getters.getPokemonsByType(type)
   } else {
-    store.dispatch('getPokemons')
+    store.dispatch('getAllPokemons')
   }
 }
-
 </script>
 
 <template>
-  <section class="pt-2">
+  <section class="pt-2 mt-4">
     <div
-      v-if="$store.state.language === 'en'"
-      class="container text-center mt-5 p-4 bg-light rounded-top"
+      class="container text-center-sm text-start-md p-4 pt-2 bg-light rounded-top"
     >
-      <h2 class="">
-        Find Pokémon
-      </h2>
-      <p class="">
-        Search your favorite pokémon by name, id, type or specie.
-      </p>
-      <div>
-        <button
-          class="btn btn-primary me-2"
-          type="button"
-          @click="$store.commit('changeInput', 'name')"
-        >
-          Name
-        </button>
-        <button
-          class="btn btn-primary me-2"
-          type="button"
-          @click="$store.commit('changeInput', 'id')"
-        >
-          Id
-        </button>
-        <button
-          class="btn btn-primary me-2"
-          type="button"
-          @click="$store.commit('changeInput', 'type')"
-        >
-          Type
-        </button>
-        <button
-          class="btn btn-primary me-2"
-          type="button"
-          @click="$store.commit('changeInput', 'specie')"
-        >
-          Specie
-        </button>
-      </div>
-      <div
-        v-if="$store.state.search === 'name'"
-        class="col-md-12 d-flex align-items-center"
-      >
-        <input
-          type="text"
-          class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by name"
-          @keyup="(e) => getPokemonsByName(e.target.value.toLowerCase())"
-        >
-      </div>
-      <div
-        v-if="$store.state.search === 'id'"
-        class="col-md-12 d-flex align-items-center"
-      >
-        <input
-          type="number"
-          class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by id"
-          @keyup="(e) => getPokemonsById(parseInt(e.target.value))"
-        >
-      </div>
-      <div
-        v-if="$store.state.search === 'specie'"
-        class="col-md-12 d-flex align-items-center"
-      >
-        <input
-          type="text"
-          class="form-control mt-3 bg-secondary bg-opacity-25"
-          placeholder="Search by specie"
-          @keyup="(e) => getPokemonsBySpecie(e.target.value.toLowerCase())"
-        >
-      </div>
-      <div
-        v-if="$store.state.search === 'type'"
-        id="app"
-      >
-        <select
-          class="form-select col-6 mt-3 bg-secondary bg-opacity-25"
-          aria-label="Small select example"
-          @change="(e) => getPokemonsByType(e.target.value)"
-        >
-          <option
-            selected
-            disabled
+      <div class=" container mt-2">
+        <h2 class="fs-3">
+          {{ $t('searchbar.title') }}
+        </h2>
+        <h3 class="fs-6 fw-normal">
+          {{ $t('searchbar.subtitle') }}
+        </h3>
+        <div>
+          <button
+            class="btn btn-outline-primary me-2 btn-sm rounded text-capitalize"
+            type="button"
+            @click="$store.commit('changeInput', 'name')"
           >
-            Select the type
-          </option>
-          <option value="grass">
-            Grass
-          </option>
-          <option value="bug">
-            Bug
-          </option>
-          <option value="fire">
-            Fire
-          </option>
-          <option value="normal">
-            Normal
-          </option>
-          <option value="water">
-            Water
-          </option>
-          <option value="electric">
-            Electric
-          </option>
-          <option value="ice">
-            Ice
-          </option>
-          <option value="fighting">
-            Fighting
-          </option>
-          <option value="poison">
-            Poison
-          </option>
-          <option value="ground">
-            Ground
-          </option>
-          <option value="flying">
-            Flying
-          </option>
-          <option value="psychic">
-            Psychic
-          </option>
-          <option value="rock">
-            Rock
-          </option>
-          <option value="ghost">
-            Ghost
-          </option>
-          <option value="dragon">
-            Dragon
-          </option>
-          <option value="dark">
-            Dark
-          </option>
-          <option value="steel">
-            Steel
-          </option>
-          <option value="fairy">
-            Fairy
-          </option>
-        </select>
-      </div>
-    </div>
-
-    <!-- <div
-      v-if="$store.state.language === 'es'"
-      class="container text-center mt-5 p-4 bg-light rounded-top"
-    >
-      <h2 class="">
-        Encontrar el pokemon
-      </h2>
-      <p class="">
-        Busca tu pokemon favorito por nombre, id, tipo o especie.
-      </p>
-      <form class="row p-2">
-        <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
+            {{ $t('searchbar.filters.name') }}
+          </button>
+          <button
+            class="btn btn-outline-primary rounded me-2 btn-sm text-capitalize"
+            type="button"
+            @click="$store.commit('changeInput', 'id')"
+          >
+            {{ $t('searchbar.filters.id') }}
+          </button>
+          <button
+            class="btn btn-outline-primary me-2 btn-sm text-capitalize"
+            type="button"
+            @click="$store.commit('changeInput', 'type')"
+          >
+            {{ $t('searchbar.filters.type') }}
+          </button>
+          <button
+            class="btn btn-outline-primary me-2 btn-sm text-capitalize"
+            type="button"
+            @click="$store.commit('changeInput', 'specie')"
+          >
+            {{ $t('searchbar.filters.species') }}
+          </button>
+        </div>
+        <div
+          v-if="$store.state.search === 'name'"
+          class="col-md-12 d-flex align-items-center"
         >
-          <option selected>
-            Buscar
-          </option>
-          <option value="1">
-            Nombre
-          </option>
-          <option value="2">
-            Id
-          </option>
-          <option value="3">
-            Tipo
-          </option>
-          <option value="4">
-            Especie
-          </option>
-        </select>
-        <div class="col-md-4">
           <input
-            id="name"
             type="text"
-            class="form-control bg-secondary bg-opacity-25"
+            class="form-control mt-3 bg-secondary bg-opacity-25"
+            :placeholder="$t('searchbar.filters.searchByName')"
+            @keyup="(e) => getPokemonsByName(e.target.value.toLowerCase())"
           >
         </div>
-      </form>
-    </div>
-
-    <div
-      v-if="$store.state.language === 'pt'"
-      class="container text-center mt-5 p-4 bg-light rounded-top"
-    >
-      <h2 class="">
-        Encontre o pokémon
-      </h2>
-      <p class="">
-        Pesquise o seu pokémon favorito pelo nome, id, tipo ou espécie.
-      </p>
-      <form class="row p-2">
-        <select
-          class="col-md-2 rounded bg-secondary bg-opacity-25 border-0"
+        <div
+          v-if="$store.state.search === 'id'"
+          class="col-md-12 d-flex align-items-center"
         >
-          <option selected>
-            Pesquisar por
-          </option>
-          <option value="1">
-            Nome
-          </option>
-          <option value="2">
-            Id
-          </option>
-          <option value="3">
-            Tipo
-          </option>
-          <option value="4">
-            Espécie
-          </option>
-        </select>
-        <div class="col-md-4">
           <input
-            id="name"
             type="text"
-            class="form-control bg-secondary bg-opacity-25"
+            class="form-control mt-3 bg-secondary bg-opacity-25"
+            :placeholder="$t('searchbar.filters.searchById')"
+            @keyup="(e) => getPokemonsById(parseInt(e.target.value))"
           >
         </div>
-      </form>
-    </div> -->
+        <div
+          v-if="$store.state.search === 'specie'"
+          class="col-md-12 d-flex align-items-center"
+        >
+          <input
+            type="text"
+            class="form-control mt-3 bg-secondary bg-opacity-25"
+            :placeholder="$t('searchbar.filters.searchBySpecies')"
+            @keyup="(e) => getPokemonsBySpecie(e.target.value.toLowerCase())"
+          >
+        </div>
+        <div
+          v-if="$store.state.search === 'type'"
+          id="app"
+        >
+          <select
+            class="form-select col-6 mt-3 bg-secondary bg-opacity-25"
+            aria-label="Small select example"
+            @change="(e) => getPokemonsByType(e.target.value)"
+          >
+            <option
+              selected
+              disabled
+            >
+              {{ $t('searchbar.filters.searchByType') }}
+            </option>
+            <option value="grass">
+              {{ $t('searchbar.types.grass') }}
+            </option>
+            <option value="bug">
+              {{ $t('searchbar.types.bug') }}
+            </option>
+            <option value="fire">
+              {{ $t('searchbar.types.fire') }}
+            </option>
+            <option value="normal">
+              {{ $t('searchbar.types.normal') }}
+            </option>
+            <option value="water">
+              {{ $t('searchbar.types.water') }}
+            </option>
+            <option value="electric">
+              {{ $t('searchbar.types.electric') }}
+            </option>
+            <option value="ice">
+              {{ $t('searchbar.types.ice') }}
+            </option>
+            <option value="fighting">
+              {{ $t('searchbar.types.fighting') }}
+            </option>
+            <option value="poison">
+              {{ $t('searchbar.types.poison') }}
+            </option>
+            <option value="ground">
+              {{ $t('searchbar.types.ground') }}
+            </option>
+            <option value="flying">
+              {{ $t('searchbar.types.flying') }}
+            </option>
+            <option value="psychic">
+              {{ $t('searchbar.types.psychic') }}
+            </option>
+            <option value="rock">
+              {{ $t('searchbar.types.rock') }}
+            </option>
+            <option value="ghost">
+              {{ $t('searchbar.types.ghost') }}
+            </option>
+            <option value="dragon">
+              {{ $t('searchbar.types.dragon') }}
+            </option>
+            <option value="dark">
+              {{ $t('searchbar.types.dark') }}
+            </option>
+            <option value="steel">
+              {{ $t('searchbar.types.steel') }}
+            </option>
+            <option value="fairy">
+              {{ $t('searchbar.types.fairy') }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
   </section>
 </template>

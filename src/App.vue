@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from 'vue'
-
 import { useStore } from 'vuex'
 
 import Header from './components/Header.vue'
@@ -11,20 +10,13 @@ const store = useStore()
 
 onMounted( () => {
   store.dispatch('getPokemons')
-  // store.dispatch('getNewPokemons')
+  store.dispatch('getAllPokemons')
 })
-
-// console.log(store.getters.allPokemonsPage)
 
 </script>
 
 <template>
   <Header />
   <SearchBar />
-  <Suspense>
-    <PokemonCard />
-    <template #fallback>
-      <p>Loading...</p>
-    </template>
-  </Suspense>
+  <PokemonCard />
 </template>
