@@ -4,9 +4,7 @@ import {onMounted} from 'vue'
 
 import { useStore } from 'vuex'
 
-import PokemonModalEN from './EN/PokemonModal.vue'
-import PokemonModalES from './ES/PokemonModal.vue'
-import PokemonModalPT from './PT/PokemonModal.vue'
+import PokemonModal from './PokemonModal.vue'
 
 import { typeColors, bgColors } from '../assets/themes/index.js'
 
@@ -146,9 +144,7 @@ const handleScroll = async (event) => {
       </div>
     </li>
   </ul>
-  <PokemonModalEN v-if="$store.state.language == 'en'" />
-  <PokemonModalES v-if="$store.state.language == 'es'" />
-  <PokemonModalPT v-if="$store.state.language == 'pt'" />
+  <PokemonModal />
 </template>
 
 <style scoped>

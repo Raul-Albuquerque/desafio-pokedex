@@ -1,6 +1,9 @@
+<script>
+</script>
+
 <template>
   <header class="bg-light">
-    <div class="container p-2 d-flex align-items-center justify-content-between">
+    <div class="container py-2 d-flex align-items-center justify-content-between">
       <h1>
         <img
           src="/assets/images/logo.svg"
