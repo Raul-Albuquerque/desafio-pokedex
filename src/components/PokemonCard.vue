@@ -1,11 +1,9 @@
 <script setup>
 
 import {onMounted} from 'vue'
-
 import { useStore } from 'vuex'
 
 import PokemonModal from './PokemonModal.vue'
-
 import { typeColors, bgColors } from '../assets/themes/index.js'
 
 const store = useStore()

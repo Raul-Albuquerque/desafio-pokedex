@@ -1,6 +1,4 @@
 <script setup>
-import {onMounted} from 'vue'
-import { useStore } from 'vuex'
 
 import { typeColors } from '@/assets/themes/index.js'
 
@@ -8,8 +6,6 @@ const getTypeColor = (type) => {
   const lowercaseType = type.toLowerCase()
   return typeColors[lowercaseType] || 'gray'
 }
-
-const store = useStore()
 
 </script>
 

@@ -2,16 +2,15 @@ import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 
 import App from './App.vue'
-
 import store from './store'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 import './services/api'
 import {en} from '@/locales/en.js'
 import {es} from '@/locales/es.js'
 import {pt} from '@/locales/pt.js'
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
 
 const languages = {
   pt,

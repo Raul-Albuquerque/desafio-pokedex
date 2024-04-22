@@ -1,11 +1,12 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+
 import api from '@/services/api'
 
 
 export default createStore({
   state: {
-    language: 'en',
+    language: 'pt',
     searchIsOn: false,
     pokemons: [],
     filteredPokemons: [],
